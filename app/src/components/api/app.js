@@ -67,8 +67,6 @@ export function getCompare(string_a, string_b) {
 
 export function elipsThis(string) {
 
-  log('STRING-> ', string)
-
   let trimmedString
   if (string.length > 8000) {
     trimmedString = string.substring(0, 80)
@@ -307,8 +305,6 @@ export function compareFiles() {
     data: compare_obj,
     fail_data: fail_obj
   }
-
-  log('FAIL-> ', fail_obj)  
 
   store.dispatch({
     type: 'LOAD_COMPARE_DATA',

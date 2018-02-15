@@ -61,8 +61,6 @@ class HomePage extends Component {
                 className='app-title' 
                 style={{color: '#C2C2C2', paddingLeft: '20px'}} />
 
-              
-
             </ToolbarGroup>
           </Toolbar>
           <div className='load-file-outter-wrap'>
