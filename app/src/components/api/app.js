@@ -67,6 +67,8 @@ export function getCompare(string_a, string_b) {
 
 export function elipsThis(string) {
 
+  log('STRING-> ', string)
+
   let trimmedString
   if (string.length > 8000) {
     trimmedString = string.substring(0, 80)
@@ -74,7 +76,6 @@ export function elipsThis(string) {
   } else {
     trimmedString = string
     let isNum = Number(trimmedString)
-    log('-> ', isNaN(isNum) )
     if (!isNaN(isNum)) {
       trimmedString = format()(trimmedString)
     }
@@ -94,6 +95,7 @@ export function compareFiles() {
   file_b = file_b.VALUATION_RESPONSE
   let compare_obj = file_a
   let fail_obj = {}
+
 
   function sub_1() {
 
@@ -137,6 +139,9 @@ export function compareFiles() {
         })
       } else if ( _.isString(data) ) { 
         let b_dat = dotProp.get(file_b, path)
+        if (b_dat === undefined || b_dat === 'undefined') {
+          b_dat = 'N/A'
+        }
         if (data === b_dat) { 
           dotProp.set(compare_obj, path, ['cpar', true, data])
         } else {
@@ -168,6 +173,9 @@ export function compareFiles() {
         })
       } else if ( _.isString(data) ) { 
         let b_dat = dotProp.get(file_b, path)
+        if (b_dat === undefined || b_dat === 'undefined') {
+          b_dat = 'N/A'
+        }
         if (data === b_dat) { 
           dotProp.set(compare_obj, path, ['cpar', true, data])
         } else {
@@ -196,6 +204,9 @@ export function compareFiles() {
         })
       } else if ( _.isString(data) ) { 
         let b_dat = dotProp.get(file_b, path)
+        if (b_dat === undefined || b_dat === 'undefined') {
+          b_dat = 'N/A'
+        }
         if (data === b_dat) { 
           dotProp.set(compare_obj, path, ['cpar', true, data])
         } else {
@@ -222,6 +233,9 @@ export function compareFiles() {
         })
       } else if ( _.isString(data) ) { 
         let b_dat = dotProp.get(file_b, path)
+        if (b_dat === undefined || b_dat === 'undefined') {
+          b_dat = 'N/A'
+        }
         if (data === b_dat) { 
           dotProp.set(compare_obj, path, ['cpar', true, data])
         } else {
@@ -248,6 +262,9 @@ export function compareFiles() {
         })
       } else if ( _.isString(data) ) { 
         let b_dat = dotProp.get(file_b, path)
+        if (b_dat === undefined || b_dat === 'undefined') {
+          b_dat = 'N/A'
+        }
         if (data === b_dat) { 
           dotProp.set(compare_obj, path, ['cpar', true, data])
         } else {
@@ -267,6 +284,9 @@ export function compareFiles() {
         // ...
       } else if ( _.isString(data) ) { 
         let b_dat = dotProp.get(file_b, path)
+        if (b_dat === undefined || b_dat === 'undefined') {
+          b_dat = 'N/A'
+        }
         if (data === b_dat) { 
           dotProp.set(compare_obj, path, ['cpar', true, data])
         } else {
@@ -287,6 +307,8 @@ export function compareFiles() {
     data: compare_obj,
     fail_data: fail_obj
   }
+
+  log('FAIL-> ', fail_obj)  
 
   store.dispatch({
     type: 'LOAD_COMPARE_DATA',

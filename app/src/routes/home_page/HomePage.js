@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 // MUI-STACK
 import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar'
 import RaisedButton from 'material-ui/RaisedButton'
+import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 
 // LOCAL-API
 import { compareFiles } from '../../components/api/app'
@@ -58,7 +59,7 @@ class HomePage extends Component {
             <ToolbarGroup firstChild={true} >
               <ToolbarTitle text='Super Awesome Report Comparing Program' 
                 className='app-title' 
-                style={{color: '#999', paddingLeft: '20px'}} />
+                style={{color: '#C2C2C2', paddingLeft: '20px'}} />
 
               
 
@@ -102,6 +103,16 @@ class HomePage extends Component {
           </div>
         </div>
         <Results />
+        <BottomNavigation style={{backgroundColor: '#C3C8C9'}}>
+
+          <div className='bottom-bar' style={{marginTop: '10px', marginLeft: '10px'}}>
+            <a href='https://github.com/cparker33' style={{textDecoration: 'none'}}>
+              <i className='fa fa-github' style={{fontSize: '30px', color: '#000'}} />
+              <span style={{marginTop: '-10px', marginLeft: '10px', color: '#000'}}>Caleb Parker</span>
+            </a>
+          </div>
+
+        </BottomNavigation>
       </div>
 
     )
