@@ -10,13 +10,13 @@ import changeCase from 'change-case'
 import { elipsThis, getCompare } from '../api/app'
 
 // COMPONENTS
-import Sub_3 from './Results_Sub_3'
+import Sub_A from './Results_Sub_A'
 
 // DEV
 const log = console.log // eslint-disable-line no-unused-vars
 
 
-class Sub_2 extends Component {
+class Sub_B extends Component {
   
   render() {
 
@@ -39,43 +39,41 @@ class Sub_2 extends Component {
                 <div>
                   {
                     Object.entries(data).map(([key, val])=> {
-
                       let section_title = key === '_attributes' ? false : key
-
                       if (section_title !== false) {
                         section_title = changeCase.sentenceCase(section_title)
                         section_title = changeCase.titleCase(section_title)
-                      }
-
+                        let num = Number(section_title)
+                        if (!isNaN(num)) {
+                          section_title = `Form Section Number: ${section_title}`
+                        }
+                      } 
                       return (
-                        <div key={shortid.generate()} className='lvl-2-main-wrap'>
-
-                          <p className='lvl-2-title'>{section_title}</p>
+                        <div key={shortid.generate()} className='lvl-3-main-wrap'>
+                          <p className='lvl-3-title'>{section_title}</p>
                           <div>
                           {
                             (()=> {
                               if (_.isPlainObject(val)) {
                                 return (
-                                  <Sub_3 data={val} />
+                                  <Sub_A data={val} />
                                 )
                               } else if (_.isArray(val)) {
                                 if (val[0] == 'cpar') {
-
+                                  
                                   if (val[1]) {
                                     return (
                                       <div className='data-val-pass'>
-                                        <p>{ elipsThis(val[2])  }</p>
+                                        <p>{ elipsThis(val[2]) }</p>
                                       </div>
                                     )
                                   } else {
-
                                     return (
                                       <div className='data-val-fail'>
                                         <div className='file-a-fail-wrap'>
                                           <h3>File A: {file_a_name}</h3>
                                           <p>{ elipsThis(val[2][0])  }</p>
                                         </div>
-
                                         <div className='file-b-fail-wrap'>
                                           <h3>File B: {file_b_name}</h3>
                                           <p>{ elipsThis(val[2][1])  }</p>
@@ -104,7 +102,7 @@ class Sub_2 extends Component {
                                         val.map((arr)=> {
                                           if (_.isPlainObject(arr)) {
                                             return (
-                                              <Sub_3 data={arr} />
+                                              <Sub_A data={arr} />
                                             )
                                           }
                                         })
@@ -135,11 +133,11 @@ const mapStateToProps = state => ({
   sys_state: state
 })
 
-Sub_2.propTypes = {
+Sub_B.propTypes = {
   sys_state: PropTypes.object,
   data: PropTypes.object
 }
 
-export default connect(mapStateToProps)(Sub_2)
+export default connect(mapStateToProps)(Sub_B)
 
 

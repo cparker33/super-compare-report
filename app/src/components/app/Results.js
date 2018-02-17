@@ -8,7 +8,8 @@ import shortid from 'shortid'
 const log = console.log // eslint-disable-line no-unused-vars
 
 // COMPONENTS
-import Sub_1 from './Results_Sub_1'
+//import Sub_1 from './Results_Sub_1'
+import Sub_A from './Results_Sub_A'
 
 
 class Results extends Component {
@@ -49,7 +50,7 @@ class Results extends Component {
                                   return (
                                     <div key={shortid.generate()} className='lvl-0-main-wrap'>
                                       <p className='lvl-0-title'>Section: {key}</p>
-                                      <Sub_1 data={val} />
+                                      <Sub_A data={val} />
                                     </div>
                                   )
                                 }

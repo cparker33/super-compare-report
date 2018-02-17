@@ -97,202 +97,91 @@ export function compareFiles() {
 
   function sub_1() {
 
-    let sub2 = new sub_2()
+      function sub_A() {
+
+        this.typeCheck = (data, path) => { 
+          if ( _.isPlainObject(data) ) {
+            _.forIn(data, (val, key)=> {
+              let new_path = path + '.' + key
+              let sub_b = new sub_B()
+              sub_b.typeCheck(val, new_path)
+            })
+          } else if ( _.isArray(data) ) {
+            _.each(data, (val, i)=> {
+              let new_path = `${path}.${i}`
+              let sub_b = new sub_B()
+              sub_b.typeCheck(val, new_path)
+            })
+          } else if ( _.isString(data) ) { 
+            let b_dat = dotProp.get(file_b, path)
+            if (b_dat === undefined || b_dat === 'undefined') {
+              b_dat = 'N/A'
+            }
+            if (data === b_dat) { 
+              dotProp.set(compare_obj, path, ['cpar', true, data])
+            } else {
+              dotProp.set(compare_obj, path, ['cpar', false, [data, b_dat]])
+              dotProp.set(fail_obj, path, ['cpar', false, [data, b_dat]])
+              
+            }
+          }
+        }
+
+      }
+
+
+      function sub_B() {
+
+        this.typeCheck = (data, path) => { 
+          if ( _.isPlainObject(data) ) {
+            _.forIn(data, (val, key)=> {
+              let new_path = path + '.' + key
+              let sub_a = new sub_A()
+              sub_a.typeCheck(val, new_path)
+            })
+          } else if ( _.isArray(data) ) {
+            _.each(data, (val, i)=> {
+              let new_path = `${path}.${i}`
+              let sub_a = new sub_A()
+              sub_a.typeCheck(val, new_path)
+            })
+          } else if ( _.isString(data) ) { 
+            let b_dat = dotProp.get(file_b, path)
+            if (b_dat === undefined || b_dat === 'undefined') {
+              b_dat = 'N/A'
+            }
+            if (data === b_dat) { 
+              dotProp.set(compare_obj, path, ['cpar', true, data])
+            } else {
+              dotProp.set(compare_obj, path, ['cpar', false, [data, b_dat]])
+              dotProp.set(fail_obj, path, ['cpar', false, [data, b_dat]])
+              
+            }
+          }
+        }
+
+      }
+
+
 
     this.typeCheck = (data, path) => { 
 
       if ( _.isPlainObject(data) ) {
         _.forIn(data, (val, key)=> {
           let new_path = path + '.' + key
-          sub2.typeCheck(val, new_path)
+          let sub_a = new sub_A()
+          sub_a.typeCheck(val, new_path)
         })
       } else if ( _.isArray(data) ) {
         _.each(data, (val, i)=> {
           let new_path = `${path}.${i}`
-          sub2.typeCheck(val, new_path)
+          let sub_a = new sub_A()
+          sub_a.typeCheck(val, new_path)
         })
-      } else if ( _.isString(data) ) { 
-        // ...
       }
     }
   }
 
-
-
-
-  function sub_2() {
-
-    let sub3 = new sub_3()
-
-    this.typeCheck = (data, path) => { 
-      if ( _.isPlainObject(data) ) {
-        _.forIn(data, (val, key)=> {
-          let new_path = path + '.' + key
-          sub3.typeCheck(val, new_path)
-        })
-      } else if ( _.isArray(data) ) {
-        _.each(data, (val, i)=> {
-          let new_path = `${path}.${i}`
-          sub3.typeCheck(val, new_path)
-        })
-      } else if ( _.isString(data) ) { 
-        let b_dat = dotProp.get(file_b, path)
-        if (b_dat === undefined || b_dat === 'undefined') {
-          b_dat = 'N/A'
-        }
-        if (data === b_dat) { 
-          dotProp.set(compare_obj, path, ['cpar', true, data])
-        } else {
-          dotProp.set(compare_obj, path, ['cpar', false, [data, b_dat]])
-          dotProp.set(fail_obj, path, ['cpar', false, [data, b_dat]])
-          
-        }
-      }
-    }
-
-  }
-
-
-
-  function sub_3() {
-
-    let sub4 = new sub_4()
-
-    this.typeCheck = (data, path) => { 
-      if ( _.isPlainObject(data) ) {
-        _.forIn(data, (val, key)=> {
-          let new_path = path + '.' + key
-          sub4.typeCheck(val, new_path)
-        })
-      } else if ( _.isArray(data) ) {
-        _.each(data, (val, i)=> {
-          let new_path = `${path}.${i}`
-          sub4.typeCheck(val, new_path)
-        })
-      } else if ( _.isString(data) ) { 
-        let b_dat = dotProp.get(file_b, path)
-        if (b_dat === undefined || b_dat === 'undefined') {
-          b_dat = 'N/A'
-        }
-        if (data === b_dat) { 
-          dotProp.set(compare_obj, path, ['cpar', true, data])
-        } else {
-          dotProp.set(compare_obj, path, ['cpar', false, [data, b_dat]])
-          dotProp.set(fail_obj, path, ['cpar', false, [data, b_dat]])
-        }
-      }
-    }
-  }
-
-
-  function sub_4() {
-
-    let sub5 = new sub_5()
-
-    this.typeCheck = (data, path) => { 
-      if ( _.isPlainObject(data) ) {
-        _.forIn(data, (val, key)=> {
-          let new_path = path + '.' + key
-          sub5.typeCheck(val, new_path)
-        })
-      } else if ( _.isArray(data) ) {
-        _.each(data, (val, i)=> {
-          let new_path = `${path}.${i}`
-          sub5.typeCheck(val, new_path)
-        })
-      } else if ( _.isString(data) ) { 
-        let b_dat = dotProp.get(file_b, path)
-        if (b_dat === undefined || b_dat === 'undefined') {
-          b_dat = 'N/A'
-        }
-        if (data === b_dat) { 
-          dotProp.set(compare_obj, path, ['cpar', true, data])
-        } else {
-          dotProp.set(compare_obj, path, ['cpar', true, [data, b_dat]])
-          dotProp.set(fail_obj, path, ['cpar', false, [data, b_dat]])
-        }
-      }
-    }
-  }
-
-
-  function sub_5() {
-    let sub6 = new sub_6()
-    this.typeCheck = (data, path) => { 
-      if ( _.isPlainObject(data) ) {
-        _.forIn(data, (val, key)=> {
-          let new_path = path + '.' + key
-          sub6.typeCheck(val, new_path)
-        })
-      } else if ( _.isArray(data) ) {
-        _.each(data, (val, i)=> {
-          let new_path = `${path}.${i}`
-          sub6.typeCheck(val, new_path)
-        })
-      } else if ( _.isString(data) ) { 
-        let b_dat = dotProp.get(file_b, path)
-        if (b_dat === undefined || b_dat === 'undefined') {
-          b_dat = 'N/A'
-        }
-        if (data === b_dat) { 
-          dotProp.set(compare_obj, path, ['cpar', true, data])
-        } else {
-          dotProp.set(compare_obj, path, ['cpar', true, [data, b_dat]])
-          dotProp.set(fail_obj, path, ['cpar', false, [data, b_dat]])
-        }
-      }
-    }
-  }
-
-
-  function sub_6() {
-    let sub7 = new sub_7()
-    this.typeCheck = (data, path) => { 
-      if ( _.isPlainObject(data) ) {
-        _.forIn(data, (val, key)=> {
-          let new_path = path + '.' + key
-          sub7.typeCheck(val, new_path)
-        })
-      } else if ( _.isArray(data) ) {
-        _.each(data, (val, i)=> {
-          let new_path = `${path}.${i}`
-          sub7.typeCheck(val, new_path)
-        })
-      } else if ( _.isString(data) ) { 
-        let b_dat = dotProp.get(file_b, path)
-        if (b_dat === undefined || b_dat === 'undefined') {
-          b_dat = 'N/A'
-        }
-        if (data === b_dat) { 
-          dotProp.set(compare_obj, path, ['cpar', true, data])
-        } else {
-          dotProp.set(compare_obj, path, ['cpar', true, [data, b_dat]])
-        }
-      }
-    }
-  }
-
-
-  function sub_7() {
-    // let sub8 = new sub_8()
-    this.typeCheck = (data, path) => { 
-      if ( _.isPlainObject(data) ) {
-        // ...
-      } else if ( _.isArray(data) ) {
-        // ...
-      } else if ( _.isString(data) ) { 
-        let b_dat = dotProp.get(file_b, path)
-        if (b_dat === undefined || b_dat === 'undefined') {
-          b_dat = 'N/A'
-        }
-        if (data === b_dat) { 
-          dotProp.set(compare_obj, path, ['cpar', true, data])
-        } else {
-          dotProp.set(compare_obj, path, ['cpar', true, [data, b_dat]])
-        }
-      }
-    }
-  }
 
   let sub1 = new sub_1()
 
@@ -305,6 +194,8 @@ export function compareFiles() {
     data: compare_obj,
     fail_data: fail_obj
   }
+
+  log('fail->', fail_obj)
 
   store.dispatch({
     type: 'LOAD_COMPARE_DATA',

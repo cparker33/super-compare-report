@@ -10,13 +10,13 @@ import changeCase from 'change-case'
 import { elipsThis, getCompare } from '../api/app'
 
 // COMPONENTS
-import Sub_5 from './Results_Sub_5'
+import Sub_B from './Results_Sub_B'
 
 // DEV
 const log = console.log // eslint-disable-line no-unused-vars
 
 
-class Sub_4 extends Component {
+class Sub_A extends Component {
   
   render() {
 
@@ -43,10 +43,12 @@ class Sub_4 extends Component {
                       if (section_title !== false) {
                         section_title = changeCase.sentenceCase(section_title)
                         section_title = changeCase.titleCase(section_title)
+                        let num = Number(section_title)
+                        if (!isNaN(num)) {
+                          section_title = `Form Section Number: ${section_title}`
+                        }
                       }
-
                       return (
-
                         <div key={shortid.generate()} className='lvl-3-main-wrap'>
                           <p className='lvl-3-title'>{section_title}</p>
                           <div>
@@ -54,10 +56,11 @@ class Sub_4 extends Component {
                             (()=> {
                               if (_.isPlainObject(val)) {
                                 return (
-                                  <Sub_5 data={val} />
+                                  <Sub_B data={val} />
                                 )
                               } else if (_.isArray(val)) {
                                 if (val[0] == 'cpar') {
+                                  
                                   if (val[1]) {
                                     return (
                                       <div className='data-val-pass'>
@@ -78,7 +81,7 @@ class Sub_4 extends Component {
                                         <div>
                                           {
                                             (()=> {
-                                              if (val[2][0].length > 1000 && val[2][0].length < 8000) {
+                                              if (val[2][0].length > 100 && val[2][0].length < 8000) {
                                                 return (
                                                   <div className='file-b-fail-wrap'>
                                                     <h3>Compared</h3>
@@ -99,7 +102,7 @@ class Sub_4 extends Component {
                                         val.map((arr)=> {
                                           if (_.isPlainObject(arr)) {
                                             return (
-                                              <Sub_5 data={arr} />
+                                              <Sub_B data={arr} />
                                             )
                                           }
                                         })
@@ -130,11 +133,11 @@ const mapStateToProps = state => ({
   sys_state: state
 })
 
-Sub_4.propTypes = {
+Sub_A.propTypes = {
   sys_state: PropTypes.object,
   data: PropTypes.object
 }
 
-export default connect(mapStateToProps)(Sub_4)
+export default connect(mapStateToProps)(Sub_A)
 
 

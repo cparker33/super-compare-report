@@ -11,7 +11,6 @@ import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigati
 // LOCAL-API
 import { compareFiles } from '../../components/api/app'
 
-
 // DEV
 const log = console.log // eslint-disable-line no-unused-vars
 
@@ -60,9 +59,9 @@ class HomePage extends Component {
               <ToolbarTitle text='Super Awesome Report Comparing Program' 
                 className='app-title' 
                 style={{color: '#C2C2C2', paddingLeft: '20px'}} />
-
             </ToolbarGroup>
           </Toolbar>
+
           <div className='load-file-outter-wrap'>
             <div id='pick-file-btn' className='load-file-inner-wrap'>
               <div className='import-btn-wrapper'>
@@ -83,34 +82,36 @@ class HomePage extends Component {
               </div>
             </div>
           </div>
+
           <div className='compare-btn-wrapper'>
 
             <RaisedButton
               label='Compare'
               disabled={!both_loaded}
-              onClick={ () => {this.handleClick()} }
+              onClick={ () => { this.handleClick() } }
               primary={true}  
             />
 
             <RaisedButton
-                label='Reset'
-                onClick={ () => { location.reload() } }
-                primary={false}  
-              />
+              label='Reset'
+              onClick={ () => { location.reload() } }
+              primary={false}  
+            />
 
           </div>
         </div>
-        <Results />
-        <BottomNavigation style={{backgroundColor: '#C3C8C9'}}>
 
+        <Results />
+
+        <BottomNavigation style={{backgroundColor: '#C3C8C9'}}>
           <div className='bottom-bar' style={{marginTop: '10px', marginLeft: '10px'}}>
             <a href='https://github.com/cparker33' style={{textDecoration: 'none'}}>
               <i className='fa fa-github' style={{fontSize: '30px', color: '#000'}} />
               <span style={{marginTop: '-10px', marginLeft: '10px', color: '#000'}}>Caleb Parker</span>
             </a>
           </div>
-
         </BottomNavigation>
+
       </div>
 
     )
