@@ -189,7 +189,7 @@ export function compareFiles() {
               sub_temp_arr.push( data )
               sub_temp_arr.push( b_dat )
               temp_arr.push(sub_temp_arr)
-              if (data.length > 100 && data.length < 8000) {
+              if (data.length > 100 && data.length < 20000) {
                 temp_arr.push( getCompare(data, b_dat) )
               } else {
                 temp_arr.push( '-' )
