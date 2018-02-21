@@ -16,7 +16,7 @@ const log = console.log // eslint-disable-line no-unused-vars
 
 // COMPONENTS
 import ImportBtn from '../../components/app/ImportBtn'
-import Results from '../../components/app/Results'
+import TableResults from '../../components/app/TableResults'
 
 
 class HomePage extends Component {
@@ -101,7 +101,7 @@ class HomePage extends Component {
           </div>
         </div>
 
-        <Results />
+        <TableResults />
 
         <BottomNavigation style={{backgroundColor: '#C3C8C9'}}>
           <div className='bottom-bar' style={{marginTop: '10px', marginLeft: '10px'}}>
