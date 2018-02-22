@@ -4,10 +4,10 @@ const dotProp = require('dot-prop')
 import React from 'react'
 import store from '../store/store'
 import _ from 'lodash'
+// import jsdiff from 'diff'
 var jsdiff = require('diff')
 import shortid from 'shortid'
-
-var format = require('format-number')
+import format from 'format-number'
 
 // DEV
 const log = console.log // eslint-disable-line no-unused-vars
@@ -27,12 +27,21 @@ export function loadFileBData(data) {
 }
 
 
+export function getLoc(data) {
+  return data.map((dat)=> {
+    return (
+      <p>{dat}</p>
+    )
+  })
+}
+
+
 
 export function getCompare(string_a, string_b) {
-
   let diff = jsdiff.diffChars(string_a, string_b)
 
   return (
+
     <div>
     {
       diff.map((part)=> {
@@ -60,6 +69,7 @@ export function getCompare(string_a, string_b) {
       })
     }
     </div>
+
   )
 }
 
@@ -93,16 +103,20 @@ export function compareFiles() {
   file_b = file_b.VALUATION_RESPONSE
   let compare_obj = file_a
   let fail_obj = {}
-
+  let fail_arr = []
 
   function sub_1() {
 
+    let path_arr = []
+ //  Embedded File
       function sub_A() {
 
         this.typeCheck = (data, path) => { 
           if ( _.isPlainObject(data) ) {
             _.forIn(data, (val, key)=> {
+              // log('A-KEY-> ', key)
               let new_path = path + '.' + key
+              path_arr.push(key)
               let sub_b = new sub_B()
               sub_b.typeCheck(val, new_path)
             })
@@ -120,8 +134,29 @@ export function compareFiles() {
             if (data === b_dat) { 
               dotProp.set(compare_obj, path, ['cpar', true, data])
             } else {
-              dotProp.set(compare_obj, path, ['cpar', false, [data, b_dat]])
-              dotProp.set(fail_obj, path, ['cpar', false, [data, b_dat]])
+              
+              
+              if (path.indexOf('EMBEDDED_FILE') === -1) {
+
+                let temp_arr = []
+                temp_arr.push(path)
+                let sub_temp_arr = []
+                sub_temp_arr.push( data )
+                sub_temp_arr.push( b_dat )
+                temp_arr.push(sub_temp_arr)
+                if (data.length > 100) {
+                  temp_arr.push( getCompare(data, b_dat) )
+                } else {
+                  temp_arr.push( '-' )
+                }
+                fail_arr.push(temp_arr)
+                path_arr = []
+
+                dotProp.set(compare_obj, path, ['cpar', false, [data, b_dat]])
+                dotProp.set(fail_obj, path, ['cpar', false, [data, b_dat]])
+
+              }
+              
               
             }
           }
@@ -135,7 +170,9 @@ export function compareFiles() {
         this.typeCheck = (data, path) => { 
           if ( _.isPlainObject(data) ) {
             _.forIn(data, (val, key)=> {
+              // log('B-KEY-> ', key)
               let new_path = path + '.' + key
+              path_arr.push(key)
               let sub_a = new sub_A()
               sub_a.typeCheck(val, new_path)
             })
@@ -153,8 +190,27 @@ export function compareFiles() {
             if (data === b_dat) { 
               dotProp.set(compare_obj, path, ['cpar', true, data])
             } else {
-              dotProp.set(compare_obj, path, ['cpar', false, [data, b_dat]])
-              dotProp.set(fail_obj, path, ['cpar', false, [data, b_dat]])
+
+              if (path.indexOf('EMBEDDED_FILE') === -1) {
+
+                let temp_arr = []
+                temp_arr.push(path)
+                let sub_temp_arr = []
+                sub_temp_arr.push( data )
+                sub_temp_arr.push( b_dat )
+                temp_arr.push(sub_temp_arr)
+                if (data.length > 100) {
+                  temp_arr.push( getCompare(data, b_dat) )
+                } else {
+                  temp_arr.push( '-' )
+                }
+                fail_arr.push(temp_arr)
+                path_arr = []
+
+                dotProp.set(compare_obj, path, ['cpar', false, [data, b_dat]])
+                dotProp.set(fail_obj, path, ['cpar', false, [data, b_dat]])
+              
+              }
               
             }
           }
@@ -165,10 +221,10 @@ export function compareFiles() {
 
 
     this.typeCheck = (data, path) => { 
-
       if ( _.isPlainObject(data) ) {
         _.forIn(data, (val, key)=> {
           let new_path = path + '.' + key
+          path_arr.push(key)
           let sub_a = new sub_A()
           sub_a.typeCheck(val, new_path)
         })
@@ -182,20 +238,18 @@ export function compareFiles() {
     }
   }
 
-
   let sub1 = new sub_1()
 
   _.forIn(file_a, (val_a_1, key_a_1)=> {
     sub1.typeCheck(val_a_1, key_a_1)
   })
-
   let compare_data = {
     is_loaded: true,
     data: compare_obj,
-    fail_data: fail_obj
+    fail_data: fail_arr
   }
 
-  log('fail->', fail_obj)
+  log('fail-> ', fail_arr)
 
   store.dispatch({
     type: 'LOAD_COMPARE_DATA',
