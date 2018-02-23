@@ -58,7 +58,7 @@ class HomePage extends Component {
             <ToolbarGroup firstChild={true} >
               <ToolbarTitle text='Super Awesome Report Comparing Program' 
                 className='app-title' 
-                style={{color: '#C2C2C2', paddingLeft: '20px'}} />
+                style={{color: '#F1F1F1', paddingLeft: '20px'}} />
             </ToolbarGroup>
           </Toolbar>
 
@@ -70,7 +70,7 @@ class HomePage extends Component {
                   is_a={true} 
                 />
               </div>
-              <p>{_props.file_data_a.file_name}</p>
+              <p className='file-name-display'>{_props.file_data_a.file_name}</p>
             </div>
             <div id='pick-file-btn' className='load-file-inner-wrap'>
               <div className='import-btn-wrapper'>
@@ -78,7 +78,7 @@ class HomePage extends Component {
                   label='Load File B'
                   is_a={false} 
                 />
-                <p>{_props.file_data_b.file_name}</p>
+                <p className='file-name-display'>{_props.file_data_b.file_name}</p>
               </div>
             </div>
           </div>
